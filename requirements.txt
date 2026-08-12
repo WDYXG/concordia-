@@ -1,0 +1,4 @@
+gdm-concordia==2.4.0
+fastembed==0.8.0
+numpy==2.5.1
+openai==2.47.0

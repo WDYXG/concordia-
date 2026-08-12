@@ -1,0 +1,8 @@
+Riverbend Concordia Agent World
+Copyright 2026 WDYXG
+
+This project uses the gdm-concordia package developed by Google DeepMind,
+available at https://github.com/google-deepmind/concordia under Apache-2.0.
+
+This project is an independent research prototype and is not affiliated with
+or endorsed by Google or Google DeepMind.

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Riverbend Agent World</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <span class="brand-mark" aria-hidden="true">R</span>
+          <div>
+            <h1>Riverbend Agent World</h1>
+            <p id="run-mode">正在加载世界数据</p>
+          </div>
+        </div>
+
+        <div class="header-controls">
+          <input
+            id="import-input"
+            class="visually-hidden"
+            type="file"
+            accept=".json,application/json"
+            multiple
+          />
+          <button
+            id="import-button"
+            class="command-button"
+            type="button"
+            title="导入一个或多个 Live Run JSON"
+          ><span aria-hidden="true">⇧</span> 导入结果</button>
+          <button
+            id="demo-button"
+            class="command-button hidden"
+            type="button"
+            title="恢复内置脚本演示"
+          >演示数据</button>
+          <label for="condition-select">实验条件</label>
+          <select id="condition-select" disabled></select>
+          <span id="validation-status" class="status-label">载入中</span>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="agent-roster" aria-label="Agent 列表">
+          <div class="panel-heading">
+            <h2>居民</h2>
+            <span id="agent-count">0</span>
+          </div>
+          <div id="agent-list" class="agent-list"></div>
+        </aside>
+
+        <section class="world-column" aria-label="Riverbend 世界">
+          <div class="world-stage">
+            <canvas id="world-canvas" aria-label="Riverbend 小镇地图"></canvas>
+            <div class="world-status">
+              <span id="round-label">时间 0</span>
+              <span id="active-action">等待模拟</span>
+            </div>
+          </div>
+
+          <div class="playback-controls" aria-label="模拟播放控制">
+            <button
+              id="reset-button"
+              class="icon-button"
+              type="button"
+              title="重置"
+              aria-label="重置"
+            >↺</button>
+            <button
+              id="play-button"
+              class="icon-button primary"
+              type="button"
+              title="播放"
+              aria-label="播放"
+            >▶</button>
+            <button
+              id="pause-button"
+              class="icon-button"
+              type="button"
+              title="暂停"
+              aria-label="暂停"
+            >Ⅱ</button>
+            <button
+              id="step-button"
+              class="icon-button"
+              type="button"
+              title="单步"
+              aria-label="单步"
+            >›|</button>
+
+            <input
+              id="timeline"
+              type="range"
+              min="0"
+              max="0"
+              value="0"
+              aria-label="模拟时间线"
+            />
+            <span id="step-label" class="step-label">步骤 0/0</span>
+
+            <label for="speed-select">速度</label>
+            <select id="speed-select">
+              <option value="1400">0.5×</option>
+              <option value="800" selected>1×</option>
+              <option value="400">2×</option>
+              <option value="180">4×</option>
+            </select>
+          </div>
+
+          <section class="experiment-strip" aria-label="实验摘要">
+            <div class="section-heading">
+              <div>
+                <h2 id="experiment-title">四组演示结果</h2>
+                <p id="experiment-subtitle">脚本数据仅用于验证流程</p>
+              </div>
+              <div id="plan-summary" class="plan-summary"></div>
+            </div>
+            <div id="condition-bars" class="condition-bars"></div>
+          </section>
+        </section>
+
+        <aside class="inspector">
+          <div class="inspector-tabs" role="tablist">
+            <button
+              id="events-tab"
+              class="tab-button active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+            >事件</button>
+            <button
+              id="agent-tab"
+              class="tab-button"
+              type="button"
+              role="tab"
+              aria-selected="false"
+            >Agent</button>
+            <button
+              id="model-tab"
+              class="tab-button"
+              type="button"
+              role="tab"
+              aria-selected="false"
+            >模型</button>
+            <button
+              id="vote-tab"
+              class="tab-button"
+              type="button"
+              role="tab"
+              aria-selected="false"
+            >投票 <span id="vote-tab-count" class="tab-count">0</span></button>
+          </div>
+
+          <section id="events-panel" class="tab-panel">
+            <div class="metrics-row">
+              <div>
+                <span>已接受动作</span>
+                <strong id="accepted-actions">0</strong>
+              </div>
+              <div>
+                <span>关系边</span>
+                <strong id="relationship-edges">0</strong>
+              </div>
+              <div>
+                <span>操纵检查</span>
+                <strong id="manipulation-check">—</strong>
+              </div>
+            </div>
+            <ol id="event-feed" class="event-feed"></ol>
+          </section>
+
+          <section id="agent-panel" class="tab-panel hidden">
+            <div id="agent-detail" class="agent-detail"></div>
+          </section>
+
+          <section id="model-panel" class="tab-panel hidden">
+            <div id="model-detail" class="model-detail"></div>
+          </section>
+
+          <section id="vote-panel" class="tab-panel hidden">
+            <div id="vote-detail" class="vote-detail"></div>
+          </section>
+        </aside>
+      </main>
+
+      <footer class="footnote">
+        <span id="data-disclaimer"></span>
+        <span id="data-time"></span>
+      </footer>
+    </div>
+
+    <script type="module" src="/dist/app.js"></script>
+  </body>
+</html>

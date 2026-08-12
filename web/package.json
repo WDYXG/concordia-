@@ -1,0 +1,10 @@
+{
+  "name": "riverbend-agent-world",
+  "private": true,
+  "scripts": {
+    "build": "bun build src/app.ts --outfile=dist/app.js --target=browser",
+    "generate": "python ../scripts/generate_world_demo.py",
+    "standalone": "python ../scripts/build_world_html.py",
+    "serve": "python ../scripts/serve_world.py"
+  }
+}
